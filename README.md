@@ -32,8 +32,8 @@ Raw scraped comments are often dirty and hard to read. The following are some cl
 6. Removing extremely long comments (likely to be errors)
 
 If "sentence" is chosen instead of "comment", we will choose sentences with
-1. >= 15 characters
-2. >= 3 words
+1. at least 15 characters
+2. at least 3 words
 3. alphabets making up at least 75% of the string (excluding white spaces such as " ")
 
 ## How to run the code?
