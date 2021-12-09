@@ -155,8 +155,8 @@ def clean_sentences(sentences):
 def main():
     parser = argparse.ArgumentParser(description = "Inputs to HWZ Scraper")
     parser.add_argument('--thread', type=str, default = "https://forums.hardwarezone.com.sg/forums/eat-drink-man-woman.16", help = "thread to scrape")
-    parser.add_argument('--target-number', type=int, default = 10000, help='target number of comments/sentences to scrape')
-    parser.add_argument('--max_per-thread', type=int, default = 1000, help='maximum number of comments from each thread')
+    parser.add_argument('--target-number', type=int, default = 10000, help='target number of comments to scrape')
+    parser.add_argument('--max-per-thread', type=int, default = 1000, help='maximum number of comments from each thread')
     parser.add_argument('--scrape-type', choices=['comments','sentences'], default='sentences', help="Scrape comments or sentences")
 
     args = parser.parse_args()
