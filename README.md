@@ -45,10 +45,10 @@ python scraping.py
 ````
 
 Additional arguments
-thread: link to the thread, default = "https://forums.hardwarezone.com.sg/forums/eat-drink-man-woman.16"
-target-number: target number of comments to scrape, default = 10000
-max-per-thread: maximum number of comments per thread, default = 1000. This helps to increase variability in the data
-scrape-type: whether the output is by comments or split into sentences
+- thread: link to the thread, default = "https://forums.hardwarezone.com.sg/forums/eat-drink-man-woman.16"
+- target-number: target number of comments to scrape, default = 10000
+- max-per-thread: maximum number of comments per thread, default = 1000. This helps to increase variability in the data
+- scrape-type: whether the output is by comments or split into sentences
 
 ## To do
 1. Multi threading to increase speed of scraping
