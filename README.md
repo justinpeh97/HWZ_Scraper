@@ -5,7 +5,7 @@
 
 The script in this repository serves as a way to scrape comments from HardwareZone (HWZ) forums. 
 
-While much progress has been made in the field of Natural Language Processing, little work has been done to study relationships between informal languages and formal languages. This repository aims to bridge the gap between informal and formal language by scraping data from HardwareZone Forums which can be treated as Singlish (Singaporean-English) data. The data can then be further processed for other uses (Data Analysis, Machine Translation etc.) The purpose of this repository is strictly for academic purpose and not for commerical usage.
+While much progress has been made in the field of Natural Language Processing, little work has been done to study relationships between informal languages and formal languages. This repository aims to bridge the gap between informal and formal language by scraping data from HardwareZone Forums which can be treated as Singlish (Singaporean-English) data. The data can then be further processed for other uses (Data Analysis, Machine Translation etc.) This repository is strictly for academic purpose and not for commerical usage.
 
 ## How does the code work?
 
