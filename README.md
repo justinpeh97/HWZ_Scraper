@@ -53,4 +53,3 @@ Additional arguments
 ## To do
 1. Multi threading to increase speed of scraping
 2. Adding more optional arguments
-3. Add in link to Kaggle notebook
