@@ -5,7 +5,7 @@
 
 The script in this repository serves as a way to scrape comments from HardwareZone (HWZ) forums. 
 
-While much progress has been made in the field of Natural Language Processing, little work has been done to study relationships between informal languages and formal languages. This repository aims to bridge the gap between informal and formal language by scraping data from HardwareZone Forums which can be treated as Singlish (Singaporean-English) data. The data can then be further processed for other uses (Data Analysis, Machine Translation etc.) The purpose of this repository is strictly for academic purpose and not for commerical usage.
+While much progress has been made in the field of Natural Language Processing, little work has been done to study relationships between informal languages and formal languages. This repository aims to bridge the gap between informal and formal language by scraping data from HardwareZone Forums which can be treated as Singlish (Singaporean-English) data. The data can then be further processed for other uses (Data Analysis, Machine Translation etc.) This repository is strictly for academic purpose and not for commerical usage.
 
 ## How does the code work?
 
@@ -17,9 +17,7 @@ While much progress has been made in the field of Natural Language Processing, l
 
 ### Scraping method
 
-A single HWZ forum consists of multiple pages of threads. Each page of thread consists of multiple threads. Each thread consists of multiple pages of comments. Each page of comment consists of multiple comments.
-
-The code is simply a nested loop which will continue scraping the forum until the **target** number of comments have been scraped. 
+To run the code, simply specify the number of threads that you wish to scrape. Lets call this number of threads k. The script will first obtain the URLs of the most recent k threads. Using the concurrent.futures module, the script utilizes multi-threading to scrape the comments from the k threads. To increase variability in data, the script limits the number of comments per thread to 1000. This can be adjusted by specifying the max-per-thread argument.
 
 ### Cleaning
 
@@ -45,12 +43,11 @@ python scraping.py
 ````
 
 Additional arguments
-thread: link to the thread, default = "https://forums.hardwarezone.com.sg/forums/eat-drink-man-woman.16"
-target-number: target number of comments to scrape, default = 10000
-max-per-thread: maximum number of comments per thread, default = 1000. This helps to increase variability in the data
-scrape-type: whether the output is by comments or split into sentences
+- thread: link to the thread, default = "https://forums.hardwarezone.com.sg/forums/eat-drink-man-woman.16"
+- num-threads: number of threads to scrape, default = 100
+- max-per-thread: maximum number of comments per thread, default = 1000. 
+- scrape-type: whether the output is by comments or split into sentences
 
 ## To do
 1. Multi threading to increase speed of scraping
 2. Adding more optional arguments
-3. Add in link to Kaggle notebook
