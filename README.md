@@ -48,6 +48,3 @@ Additional arguments
 - max-per-thread: maximum number of comments per thread, default = 1000. 
 - scrape-type: whether the output is by comments or split into sentences
 
-## To do
-1. Multi threading to increase speed of scraping
-2. Adding more optional arguments
