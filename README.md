@@ -17,7 +17,7 @@ While much progress has been made in the field of Natural Language Processing, l
 
 ### Scraping method
 
-To run the code, simply specify the number of threads that you wish to scrape. Lets call this number of threads k. The script will first obtain the URLs of the most recent k threads. Using the concurrent.futures module, the script utilizes multi-threading to scrape the comments from the k threads. To increase variability in data, the script limits the number of comments per thread to 1000. This can be adjusted by specifying the max-per-thread argument.
+To run the code, simply specify the number of threads that you wish to scrape. Lets call this number of threads k. The script will first obtain the URLs of the k most recent  threads. Using the concurrent.futures module, the script utilizes multi-threading to scrape the comments from the k threads. To increase variability in data, the script limits the number of comments per thread to 1000. This can be adjusted by specifying the max-per-thread argument.
 
 ### Cleaning
 
@@ -46,5 +46,4 @@ Additional arguments
 - thread: link to the thread, default = "https://forums.hardwarezone.com.sg/forums/eat-drink-man-woman.16"
 - num-threads: number of threads to scrape, default = 100
 - max-per-thread: maximum number of comments per thread, default = 1000. 
-
 
