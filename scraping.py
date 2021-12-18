@@ -42,7 +42,7 @@ def obtain_all_threads(url, target_num_threads):
 
 def scrape_hwz(url, target_num_threads = 100, max_per_thread = 1000):
     start = time.time()
-    def comments_from_thread(url, max_per_thread=1000):
+    def comments_from_thread(url, max_per_thread):
         response = get(url)
         html_soup = BeautifulSoup(response.text, 'html.parser')
         max_pages = obtain_max_pages(html_soup) if int(obtain_max_pages(html_soup)) < max_per_thread // 20 else max_per_thread // 20
@@ -52,13 +52,14 @@ def scrape_hwz(url, target_num_threads = 100, max_per_thread = 1000):
             html_soup = BeautifulSoup(response.text,'html.parser')
             for soup in html_soup.find_all("div", class_ = "bbWrapper"):
                 comment = soup.text
+                comment = re.sub('[\n|\t]+',".",comment)
                 all_comments.append(comment)
         return 
     
     all_comments = []
     all_threads = obtain_all_threads(url, target_num_threads)
     with concurrent.futures.ThreadPoolExecutor() as executor:
-        future_to_url = {executor.submit(comments_from_thread, thread): thread for thread in all_threads}
+        future_to_url = {executor.submit(comments_from_thread, thread, max_per_thread): thread for thread in all_threads}
         completed = 0
         for future in concurrent.futures.as_completed(future_to_url):
             completed += 1
@@ -71,7 +72,6 @@ def scrape_hwz(url, target_num_threads = 100, max_per_thread = 1000):
 def clean_comments(comments):
     cleaned_comments = []
     for comment in comments:
-        comment = re.sub('[\n|\t]+',".",comment)
         while "Click to expand...." in comment:
             pos = re.search("Click to expand....",comment)
             comment = comment[(pos.span()[1]):]
@@ -135,25 +135,22 @@ def clean_sentences(sentences):
 def main():
     parser = argparse.ArgumentParser(description = "Inputs to HWZ Scraper")
     parser.add_argument('--thread', type=str, default = "https://forums.hardwarezone.com.sg/forums/eat-drink-man-woman.16", help = "thread to scrape")
-    parser.add_argument('--num-threads', type=int, default = 100, help='number of threads to scrape')
-    parser.add_argument('--max-per-thread', type=int, default = 1000, help='maximum number of comments from each thread')
-    parser.add_argument('--scrape-type', choices=['comments','sentences'], default='sentences', help="Scrape comments or sentences")
+    parser.add_argument('--num-threads', type=int, default = 50, help='number of threads to scrape')
+    parser.add_argument('--max-per-thread', type=int, default = 100, help='maximum number of comments from each thread')
 
     args = parser.parse_args()
 
     all_comments = scrape_hwz("https://forums.hardwarezone.com.sg/forums/eat-drink-man-woman.16", args.num_threads, args.max_per_thread)
-    comments_cleaned = clean_comments(all_comments)
+    textfile = open("comments.txt", "w", encoding='utf-8')
+    for element in all_comments:
+       textfile.write(element + "\n")
 
-    if args.scrape_type == 'comments':
-        textfile = open("cleaned_comments.txt", "w", encoding='utf-8')
-        for element in comments_cleaned:
-           textfile.write(element + "\n")
-    else:
-        sentences = convert_to_sentences(comments_cleaned)
-        cleaned_sentences = clean_sentences(sentences)
-        textfile = open("cleaned_sentences.txt", "w", encoding='utf-8')
-        for element in cleaned_sentences:
-           textfile.write(element + "\n")
+    comments_cleaned = clean_comments(all_comments)
+    sentences = convert_to_sentences(comments_cleaned)
+    cleaned_sentences = clean_sentences(sentences)
+    textfile = open("cleaned_sentences.txt", "w", encoding='utf-8')
+    for element in cleaned_sentences:
+       textfile.write(element + "\n")
 
 
 if __name__ == '__main__':
