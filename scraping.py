@@ -140,7 +140,7 @@ def main():
 
     args = parser.parse_args()
 
-    all_comments = scrape_hwz("https://forums.hardwarezone.com.sg/forums/eat-drink-man-woman.16", args.num_threads, args.max_per_thread)
+    all_comments = scrape_hwz(args.thread, args.num_threads, args.max_per_thread)
     textfile = open("comments.txt", "w", encoding='utf-8')
     for element in all_comments:
        textfile.write(element + "\n")
